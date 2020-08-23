@@ -1,0 +1,20 @@
+.row{
+    display: flex;
+    background-color: aquamarine;
+    width: 320px;
+    height: 45px;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-around;
+    td{
+        background-color: rgba(238, 255, 0, 0.555);
+        width: 40px;
+        height: 40px;
+        text-align: center;
+        line-height: 45px;
+        border-radius: 50%;
+        &:hover{
+            background-color: rgba(255, 174, 0, 0.555);
+        }
+    }
+}
