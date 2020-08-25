@@ -1,18 +1,20 @@
-@import '../Calendar/variables.scss';
+@import '../variables.scss';
 
 
 table {
   display: block;
   tbody {
     display: flex;
+    justify-content: space-between;
     flex-direction: column;
+    height: 100%;
+    width: 100%;
   }
   tr {
     display: flex;
     align-items: center;
     justify-content: space-between;
   }
-
   th {
     color: $highlight_color;
     font-weight: bold;

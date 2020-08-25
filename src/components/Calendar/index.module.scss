@@ -1,0 +1,62 @@
+@import 'variables.scss';
+
+.calendar {
+  width: 700px;
+  height: 450px;
+  border: 10px solid $border_text_color;
+  margin: 10px auto;
+  display: flex;
+  & > * {
+    width: 50%;
+    height: 100%;
+    padding: 5%;
+  }
+
+  .currentDay {
+    background-color: $bg_main_color;
+    text-align: center;
+    color: $bg_white_color;
+    text-transform: uppercase;
+    &:hover {
+      text-shadow: 0 0 20px $border_text_color;
+      transition: all 100ms;
+    }
+    div:first-child {
+      height: 15%;
+      font-weight: bold;
+      font-size: 1.2rem;
+      display: flex;
+      justify-content: center;
+      p {
+        display: block;
+        margin: auto 0;
+      }
+    }
+    div:last-child {
+      height: 85%;
+      font-size: 11rem;
+      display: flex;
+      justify-content: center;
+      p {
+        display: block;
+        margin: auto 0;
+      }
+    }
+  }
+
+  .month {
+    background-color: $bg_white_color;
+    & > div {
+      height: 15%;
+      & > * {
+        margin: auto 0;
+      }
+    }
+    & > table {
+      height: 85%;
+      & > * {
+        margin: auto 0;
+      }
+    }
+  }
+}

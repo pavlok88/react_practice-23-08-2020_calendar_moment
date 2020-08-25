@@ -4,11 +4,13 @@ import Week from '../Week/Week';
 import './Month.module.scss';
 
 const Month = ({ selectedMonthObj }) => {
+  //находим порядковый номер в году первой недели выбранного месяца и последней недели
   const startWeek = +moment(selectedMonthObj).startOf('month').format('W');
   const endWeek = +moment(selectedMonthObj).endOf('month').format('W');
   console.log(startWeek);
   console.log(endWeek);
 
+  //создаем цикл в указанном диапазоне недель, цикл передает номер недели в компонент неделя
   const monthTable = (start = startWeek, end = endWeek) => {
     //console.log(start);
     //console.log(end);

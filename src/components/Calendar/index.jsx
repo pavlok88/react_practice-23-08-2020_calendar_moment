@@ -1,11 +1,9 @@
 import React, { useState} from 'react';
 import moment from 'moment';
-
-import Month from '../Month/Month';
-import CurrentDay from '../CurrentDay/CurrentDay';
-import SelectMonth from '../SelectMonth/SelectMonth';
-
-import style from './Calendar.module.scss';
+import Month from './Month/Month';
+import CurrentDay from './CurrentDay';
+import SelectMonth from './SelectMonth/SelectMonth';
+import style from './index.module.scss';
 
 const Calendar = () => {
   const [selectedMonthObj, setMonthObj] = useState(moment());
@@ -21,6 +19,7 @@ const Calendar = () => {
   const resetMonth = () => {
     setMonthObj(moment());
   };
+  
 console.log(selectedMonthObj.format('MMM'))
   return (
     <div className={style.calendar}>
