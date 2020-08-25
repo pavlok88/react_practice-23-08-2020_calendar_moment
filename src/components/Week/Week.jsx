@@ -1,18 +1,24 @@
 import React from 'react';
-import moment from 'moment';
-import style from './Week.module.scss'
+import Day from '../Day/Day';
 
-const Week = ({ weekNumber }) => {
-  const getWeek = (num) => {
+const Week = ({ weekNumber, selectedMonthObj }) => {
+  //console.log(weekNumber)
+  const weekRow = () => {
     const weekArr = [];
-    for (let d = 0; d < 7; d++) {
-      weekArr.push(<td key={d}>{moment(num, 'W').add(d, 'day').format('D')}</td>);
-     // console.log(weekArr);
+    for (let d = 1; d <= 7; d++) {
+      weekArr.push(
+        <Day
+          key={d}
+          selectedMonthObj={selectedMonthObj}
+          weekNumber={weekNumber}
+          dayInWeek={d}
+        />
+      );
     }
     return weekArr;
   };
 
-  return <tr className={style.row}>{getWeek(weekNumber)}</tr>;
+  return <tr>{weekRow()}</tr>;
 };
 
 export default Week;

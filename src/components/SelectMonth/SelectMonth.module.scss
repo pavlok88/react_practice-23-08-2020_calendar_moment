@@ -1,0 +1,19 @@
+@import '../Calendar/variables.scss';
+.selectMonthContainer {
+  display: flex;
+  justify-content: space-between;
+  text-transform: uppercase;
+  color: $border_text_color;
+  font-weight: bold;
+  .button {
+    color: $highlight_color;
+    width: 20%;
+    text-align: center;
+    cursor: pointer;
+    &:hover {
+      text-shadow: 0 0 3px $highlight_color;
+      transform: scale(1.4, 1.4);
+      transition: all 150ms;
+    }
+  }
+}

@@ -1,0 +1,20 @@
+@import '../Calendar/variables.scss';
+
+
+table {
+  display: block;
+  tbody {
+    display: flex;
+    flex-direction: column;
+  }
+  tr {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  th {
+    color: $highlight_color;
+    font-weight: bold;
+  }
+}

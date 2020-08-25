@@ -1,25 +1,40 @@
-import React from 'react';
+import React, { useState} from 'react';
 import moment from 'moment';
-import Week from '../Week/Week';
 
-const Calendar = ({monthNumber}) => {
-  const daysInMonth = moment(monthNumber, 'M').endOf('month').format('D');
-  //console.log(daysInMonth);
-  const startWeek = moment(monthNumber, 'M').startOf('month').format('W');
-  //console.log(startWeek);
-  const endWeek = moment(monthNumber, 'M').endOf('month').format('W');
-  //console.log(endWeek);
+import Month from '../Month/Month';
+import CurrentDay from '../CurrentDay/CurrentDay';
+import SelectMonth from '../SelectMonth/SelectMonth';
 
-  const weekList = (start = startWeek, end = endWeek) => {
-    const arr = [];
-    for (let w = start; w <= end; w++) {
-      arr.push(<Week weekNumber={w} key={w} />);
-    }
-    console.log(arr);
-    return arr;
+import style from './Calendar.module.scss';
+
+const Calendar = () => {
+  const [selectedMonthObj, setMonthObj] = useState(moment());
+
+  const addMonth = () => {
+    const newDate = selectedMonthObj.clone();
+    setMonthObj(newDate.add(1, 'month'));
   };
-
-  return <table>{weekList()}</table>;
+  const delMonth = () => {
+    const newDate = selectedMonthObj.clone();
+    setMonthObj(newDate.subtract(1, 'month'));
+  };
+  const resetMonth = () => {
+    setMonthObj(moment());
+  };
+console.log(selectedMonthObj.format('MMM'))
+  return (
+    <div className={style.calendar}>
+      <CurrentDay resetMonth={resetMonth} />
+      <div className={style.month}>
+        <SelectMonth
+          selectedMonthObj={selectedMonthObj}
+          addMonth={addMonth}
+          delMonth={delMonth}
+        />
+        <Month selectedMonthObj={selectedMonthObj} />
+      </div>
+    </div>
+  );
 };
 
 export default Calendar;

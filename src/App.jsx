@@ -1,7 +1,11 @@
 import React from 'react';
-import Calendar from './components/Calendar/Calendar'
+import Calendar from './components/Calendar/Calendar';
+
+
 function App() {
-  return (<Calendar monthNumber={8}/>);
+  return (
+    <Calendar />
+  );
 }
 
 export default App;
