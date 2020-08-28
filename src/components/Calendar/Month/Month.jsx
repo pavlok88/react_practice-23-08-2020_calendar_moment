@@ -4,40 +4,40 @@ import Week from '../Week/Week';
 import './Month.module.scss';
 
 const Month = ({ selectedMonthObj }) => {
-  //находим порядковый номер в году первой недели выбранного месяца и последней недели
-  const startWeek = +moment(selectedMonthObj).startOf('month').format('W');
-  const endWeek = +moment(selectedMonthObj).endOf('month').format('W');
-  console.log(startWeek);
-  console.log(endWeek);
 
-  //создаем цикл в указанном диапазоне недель, цикл передает номер недели в компонент неделя
-  const monthTable = (start = startWeek, end = endWeek) => {
-    //console.log(start);
-    //console.log(end);
+  const monthTable = () => {
+    //создаем moment объекты которые указывают на первую и последнюю неделю месяца
+    const startWeekObj = moment(selectedMonthObj).startOf('month').startOf('isoWeek');
+    const endWeekObj = moment(selectedMonthObj).endOf('month').startOf('isoWeek');
     const arr = [];
-    if (start > end) start = 0;
-    for (let w = start; w <= end; w++) {
-        arr.push(
-        <Week weekNumber={w} key={w} selectedMonthObj={selectedMonthObj} />
+    //создаем цикл, в цикле объект неделя передается в компонент week
+    while (startWeekObj.isSameOrBefore(endWeekObj)) {
+      arr.push(
+        <Week
+          weekObj={startWeekObj.clone()}
+          key={startWeekObj.format('W')}
+          selectedMonthObj={selectedMonthObj}
+        />
       );
+      startWeekObj.add(1, 'week');
     }
     return arr;
   };
-  const DayTitle = () => (
-    <tr>
-      <th>M</th>
-      <th>T</th>
-      <th>W</th>
-      <th>T</th>
-      <th>F</th>
-      <th>S</th>
-      <th>S</th>
-    </tr>
-  );
+  
+  //получаем сокращенные названия дней недели
+  const DayOfWeekTitle = () => {
+    const weekDaysArr = moment.weekdaysMin();
+    const isoWeekDaysArr = [...weekDaysArr.slice(1), weekDaysArr[0]];
+    const thElem = isoWeekDaysArr.map((el) => {
+      return <th key={el}>{el[0]}</th>;
+    });
+    return <tr>{thElem}</tr>;
+  };
+
   return (
     <table>
       <tbody>
-        <DayTitle />
+        <DayOfWeekTitle />
         {monthTable()}
       </tbody>
     </table>

@@ -1,36 +1,41 @@
-import React, { useState} from 'react';
+import React, { useState } from 'react';
 import moment from 'moment';
 import Month from './Month/Month';
-import CurrentDay from './CurrentDay';
-import SelectMonth from './SelectMonth/SelectMonth';
 import style from './index.module.scss';
 
 const Calendar = () => {
   const [selectedMonthObj, setMonthObj] = useState(moment());
 
-  const addMonth = () => {
-    const newDate = selectedMonthObj.clone();
-    setMonthObj(newDate.add(1, 'month'));
+  const addMonth = () => setMonthObj(moment(selectedMonthObj).add(1, 'month'));
+  const delMonth = () => setMonthObj(moment(selectedMonthObj).subtract(1, 'month'));
+  const resetMonth = () => setMonthObj(moment());
+  
+  const CurrentDay = () => {
+    return (
+      <div className={style.currentDay} onClick={resetMonth}>
+        <div><p>{moment().format('dddd')}</p></div>
+        <div><p>{moment().format('D')}</p></div>
+      </div>
+    );
   };
-  const delMonth = () => {
-    const newDate = selectedMonthObj.clone();
-    setMonthObj(newDate.subtract(1, 'month'));
-  };
-  const resetMonth = () => {
-    setMonthObj(moment());
+
+  const SelectMonth = () => {
+    return (
+      <div className={style.selectMonthContainer}>
+        <div className={style.button} onClick={delMonth}>{'<'}</div>
+        <div>{moment(selectedMonthObj).format('MMMM YYYY')}</div>
+        <div className={style.button} onClick={addMonth}>{'>'}</div>
+      </div>
+    );
   };
   
-console.log(selectedMonthObj.format('MMM'))
   return (
     <div className={style.calendar}>
-      <CurrentDay resetMonth={resetMonth} />
+      <CurrentDay/>
       <div className={style.month}>
-        <SelectMonth
-          selectedMonthObj={selectedMonthObj}
-          addMonth={addMonth}
-          delMonth={delMonth}
-        />
-        <Month selectedMonthObj={selectedMonthObj} />
+        <SelectMonth/>
+         {/* в компонент месяц передаем moment объект выбранного месяца */}
+        <Month selectedMonthObj={selectedMonthObj} /> 
       </div>
     </div>
   );
